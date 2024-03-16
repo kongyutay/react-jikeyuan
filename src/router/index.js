@@ -16,7 +16,7 @@ const rounter = createBrowserRouter(
             element: <AuthRoute><Layout /></AuthRoute>,
             children: [
                 {
-                    path: 'home',
+                    path: '/',
                     element: <Home />
                 },
                 {
