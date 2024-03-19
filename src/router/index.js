@@ -9,7 +9,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import { AuthRoute } from '@/components/AuthRoute'
 
 //配置路由实例
-const rounter = createBrowserRouter(
+const router = createBrowserRouter(
     [
         {
             path: "/",
@@ -36,4 +36,4 @@ const rounter = createBrowserRouter(
     ]
 )
 
-export default rounter
+export default router
