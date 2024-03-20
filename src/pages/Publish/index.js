@@ -22,7 +22,7 @@ import { getChannelAPI, createArticleAPI } from '@/apis/article'
   
   const Publish = () => {
     //获取频道列表
-    const [channelList, setChannelList] = useState()
+    const [channelList, setChannelList] = useState([])
 
     useEffect(()=>{
         //封装函数 在函数内调用接口
