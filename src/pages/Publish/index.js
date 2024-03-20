@@ -33,6 +33,24 @@ import { getChannelAPI } from '@/apis/article'
         }
         getChannelList()
     },[])
+
+    //提交表单
+    const onFinish = (formValue) => {
+        const {title, content, channel_id} = formValue
+        //按照表单格式处理收集到的表单数据
+        const reqData = {
+            title,
+            content,
+            cover: {
+                type: 0,
+                images: []
+            },
+            channel_id
+        }
+        //调用接口
+        createArticleAPI(reqData)
+    }
+
     return (
       <div className="publish">
         <Card
@@ -48,6 +66,7 @@ import { getChannelAPI } from '@/apis/article'
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 16 }}
             initialValues={{ type: 1 }}
+            onFinish={onFinish}
           >
             <Form.Item
               label="标题"
