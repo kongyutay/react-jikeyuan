@@ -7,7 +7,8 @@ import {
     Input,
     Upload,
     Space,
-    Select
+    Select,
+    message
   } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
@@ -36,14 +37,16 @@ import { getChannelAPI, createArticleAPI } from '@/apis/article'
 
     //提交表单
     const onFinish = (formValue) => {
+      //必须校验封面类型imageType是否和实际的图片列表imageList数量是相等的
+      if(imageList.length !== imageType) return message.warning('封面类型和图片数量不匹配')
         const {title, content, channel_id} = formValue
         //按照表单格式处理收集到的表单数据
         const reqData = {
             title,
             content,
             cover: {
-                type: 0,
-                images: []
+                type: imageType, //封面模式
+                images: imageList.map(item => item.response.data.url)
             },
             channel_id
         }
@@ -113,6 +116,7 @@ import { getChannelAPI, createArticleAPI } from '@/apis/article'
                   showUploadList
                   action={'http://geek.itheima.net/v1_0/upload'}
                   onChange={onChange}
+                  maxCount={imageType}
                 >
                   <div style={{ marginTop: 8 }}>
                     <PlusOutlined />
