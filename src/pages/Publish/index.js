@@ -23,7 +23,7 @@ import { getChannelAPI, createArticleAPI } from '@/apis/article'
   const Publish = () => {
     //获取频道列表
     const [channelList, setChannelList] = useState([])
-
+    
     useEffect(()=>{
         //封装函数 在函数内调用接口
         //调用函数
@@ -51,6 +51,11 @@ import { getChannelAPI, createArticleAPI } from '@/apis/article'
         createArticleAPI(reqData)
     }
 
+    //上传回调
+    const [imageList, setImageList] = useState([])
+    const onChange = (value)=> {
+      setImageList(value.fileList)
+    }
     return (
       <div className="publish">
         <Card
@@ -85,6 +90,26 @@ import { getChannelAPI, createArticleAPI } from '@/apis/article'
                 {channelList.map(item => <Option key={item.id} value={item.id}>{item.name}</Option>)}
                 
               </Select>
+            </Form.Item>
+            <Form.Item label="封面">
+              <Form.Item name="type">
+                <Radio.Group>
+                  <Radio value={1}>单图</Radio>
+                  <Radio value={3}>三图</Radio>
+                  <Radio value={0}>无图</Radio>
+                </Radio.Group>
+              </Form.Item>
+              <Upload
+                name="image"
+                listType="picture-card"
+                showUploadList
+                action={'http://geek.itheima.net/v1_0/upload'}
+                onChange={onChange}
+              >
+                <div style={{ marginTop: 8 }}>
+                  <PlusOutlined />
+                </div>
+              </Upload>
             </Form.Item>
             <Form.Item
               label="内容"
