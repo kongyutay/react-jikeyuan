@@ -20,6 +20,16 @@ export function createArticleAPI(data){
     })
 }
 
+//更新文章表单
+export function updateArticleAPI(data){
+    //写完之后要返回出去和导出
+    return request({
+        url: `/mp/articles/${data.id}?draft=false`,
+        method: 'PUT',
+        data
+    })
+}
+
 //获取文章列表
 export function getArticleListAPI(data){
     return request({
