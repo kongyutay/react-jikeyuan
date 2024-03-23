@@ -71,7 +71,20 @@ import { useChannel } from '@/hooks/useChannel'
       //调用实例方法完成回填
       async function getArticleDetail (){
         const res = await getArticleById(articleId)
-        form.setFieldsValue(res.data)
+        const data = res.data
+        const {cover} = data
+        form.setFieldsValue({
+          ...data,
+          //回填封面类型
+          type: cover.type
+          
+          
+        })
+        //回填图片列表
+        setImageType(cover.type)
+        setImageList(cover.images.map(url=>{
+          return {url}
+        }))
       }
       getArticleDetail()
     }, [articleId, form])
@@ -128,6 +141,7 @@ import { useChannel } from '@/hooks/useChannel'
                   action={'http://geek.itheima.net/v1_0/upload'}
                   onChange={onChange}
                   maxCount={imageType}
+                  fileList={imageList}
                 >
                   <div style={{ marginTop: 8 }}>
                     <PlusOutlined />
