@@ -86,7 +86,10 @@ import { useChannel } from '@/hooks/useChannel'
           return {url}
         }))
       }
-      getArticleDetail()
+      if(articleId) {
+        getArticleDetail()
+      }
+      
     }, [articleId, form])
 
     return (
@@ -95,7 +98,7 @@ import { useChannel } from '@/hooks/useChannel'
           title={
             <Breadcrumb items={[
               { title: <Link to={'/'}>首页</Link> },
-              { title: '发布文章' },
+              { title: `${articleId ? '编辑' : '发布'}文章` },
             ]}
             />
           }
